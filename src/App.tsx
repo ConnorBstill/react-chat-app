@@ -10,22 +10,23 @@ import RegisterScreen from './pages/RegisterPage/RegisterPage';
 import LoginScreen from './pages/LoginPage/LoginPage';
 import MessagesPage from './pages/MessagesPage/MessagesPage';
 
-import './App.css'
+import '../colors.scss'
+import './App.scss'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/messages" element={<MessagesPage />}></Route>
+    <div className='app-container'>
+      <Router>
+        <Routes>
+          <Route path="/messages" element={<MessagesPage />}></Route>
 
-        <Route path="/login" element={<LoginScreen />}></Route>
+          <Route path="/login" element={<LoginScreen />}></Route>
 
-        <Route path="/" element={<RegisterScreen />}></Route>
-      </Routes>
-    </Router>
-  )
+          <Route path="/" element={<RegisterScreen />}></Route>
+        </Routes>
+      </Router>
+    </div>
+  );
 }
 
-export default App
+export default App;
