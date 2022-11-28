@@ -2,10 +2,11 @@ import React from 'react';
 
 interface InputProps {
   placeholder: string;
+  type?: string;
   style?: any;
 }
 
-export const Input = ({ placeholder, style }: InputProps) => {
+export const Input = ({ placeholder, type, style }: InputProps) => {
   const inputStyle = {
     borderRadius: 5,
     height: 30,
@@ -15,6 +16,6 @@ export const Input = ({ placeholder, style }: InputProps) => {
   }
 
   return (
-    <input style={{ ...inputStyle, ...style }} placeholder={placeholder} />
+    <input type={type} style={{ ...inputStyle, ...style }} placeholder={placeholder} />
   )
 }
