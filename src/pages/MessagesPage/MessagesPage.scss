@@ -9,6 +9,9 @@
   .chats {
     display: flex;
     background-color: var(--secondary-color);
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
     width: 30%;
   }
 

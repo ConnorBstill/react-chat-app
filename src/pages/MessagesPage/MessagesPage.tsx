@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 
 import { fetchLastMessages } from '../../ApiServices/messagesService';
 
-import MessagePreview from '../../components/MessagePreview';
+import MessagePreview from '../../components/MessagePreview/MessagePreview';
 
 import './MessagesPage.scss';
 
 const MessagesPage = () => {
+  const [selectedChatIndex, setSelectedChatIndex] = useState(-1);
   const { data, isLoading, isError } = useQuery('lastMessages', fetchLastMessages);
 
   if (isLoading) return <p>Loading...</p>;
@@ -16,7 +17,15 @@ const MessagesPage = () => {
   console.log(data);
 
   const lastMessages = data?.data.map(({ body, from, date }, index) => {
-    return <MessagePreview body={body} from={from} date={date} key={index} />
+    return (
+      <MessagePreview
+        onClick={() => setSelectedChatIndex(index)}
+        body={body} 
+        from={from} 
+        date={date} 
+        key={index} 
+        selected={selectedChatIndex === index ? true : false} />
+    )
   });
 
   return (
