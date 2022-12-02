@@ -6,8 +6,11 @@ import {
   Link
 } from 'react-router-dom';
 
-import { QueryClient, QueryClientProvider } from 'react-query'
+// State management
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { Provider } from 'jotai';
 
+// Components
 import RegisterScreen from './pages/RegisterPage/RegisterPage';
 import LoginScreen from './pages/LoginPage/LoginPage';
 import MessagesPage from './pages/MessagesPage/MessagesPage';
@@ -19,19 +22,21 @@ const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <div className='app-container'>
-        <Router>
-          <Routes>
-            <Route path="/messages" element={<MessagesPage />}></Route>
+    <Provider>
+      <QueryClientProvider client={queryClient}>
+        <div className='app-container'>
+          <Router>
+            <Routes>
+              <Route path="/messages" element={<MessagesPage />}></Route>
 
-            <Route path="/login" element={<LoginScreen />}></Route>
+              <Route path="/login" element={<LoginScreen />}></Route>
 
-            <Route path="/" element={<RegisterScreen />}></Route>
-          </Routes>
-        </Router>
-      </div>
-    </QueryClientProvider>
+              <Route path="/" element={<RegisterScreen />}></Route>
+            </Routes>
+          </Router>
+        </div>
+      </QueryClientProvider>
+    </Provider>
   );
 }
 
