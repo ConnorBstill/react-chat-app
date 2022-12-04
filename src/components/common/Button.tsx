@@ -9,7 +9,8 @@ interface ButtonProps {
 export const Button = ({ children, onClick, type }: ButtonProps) => {
   const buttonStyles = {
     width: '100%',
-    height: 42
+    height: 42,
+    cursor: 'pointer'
   }
 
   return (

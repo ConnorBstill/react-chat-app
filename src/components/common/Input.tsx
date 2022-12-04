@@ -1,12 +1,13 @@
-import React from 'react';
-
+import { ChangeEvent } from '../../types/interfaces';
 interface InputProps {
   placeholder: string;
+  onChange: any;
   type?: string;
   style?: any;
+  name?: string;
 }
 
-export const Input = ({ placeholder, type, style }: InputProps) => {
+export const Input = ({ placeholder, type, style, name, onChange }: InputProps) => {
   const inputStyle = {
     borderRadius: 5,
     height: 30,
@@ -16,6 +17,10 @@ export const Input = ({ placeholder, type, style }: InputProps) => {
   }
 
   return (
-    <input type={type} style={{ ...inputStyle, ...style }} placeholder={placeholder} />
-  )
+    <input 
+      onChange={(event: ChangeEvent) => onChange(event)} 
+      type={type} 
+      style={{ ...inputStyle, ...style }} 
+      placeholder={placeholder} />
+  );
 }

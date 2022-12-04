@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useState, useRef } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 
-import { Input, Button } from '../../components/common'
+import AuthFormContainer from '../../components/AuthFormContainer';
+import { Input, Button } from '../../components/common';
+
+import { ChangeEvent } from '../../types/interfaces';
 
 import './RegisterPage.scss';
+
+// interface State {
+//   username: '',
+//     password: '',
+//     confirmPassword: ''
+// }
 
 const RegisterScreen = () => {
   const [registerForm, setRegisterForm] = useState({
@@ -11,27 +20,35 @@ const RegisterScreen = () => {
     password: '',
     confirmPassword: ''
   });
-  const navigate = useNavigate();
-  const passwordMatchErrorMsg = ';'
   
-  function handleRegisterClick() {
+  const navigate = useNavigate();
+  const { password, confirmPassword } = registerForm
+  const passwordMatchErrorMsg = password !== confirmPassword ? 'Passwords must match' : '';
+  
+  const handleRegisterClick = () => {
     navigate('/messages');
   }
 
+  const handleFormChange = (event: ChangeEvent) => {
+    const { name, value } = event.target;
+    setRegisterForm((prevForm: any) => { 
+     return { ...prevForm, [name]: value }
+    });
+  }
+
   return (
-    <div className='container'>
-      <div className='content-container'>
-        <h1 className=''>Log In</h1>
+    <AuthFormContainer>
+      <h1 className=''>Register</h1>
 
-        {/* <div className='buttons-container'> */}
-        <Input placeholder='Username' />
-        <Input type='password' placeholder='Password' />
-        <Input type='password' placeholder='Confirm password' />
+      <Input onChange={(event: ChangeEvent) => handleFormChange(event)} placeholder='Username' />
+      <Input onChange={(event: ChangeEvent) => handleFormChange(event)} type='password' placeholder='Password' />
+      <Input onChange={(event: ChangeEvent) => handleFormChange(event)} type='password' placeholder='Confirm password' />
 
-        <Button onClick={() => handleRegisterClick()} type='button'>Register</Button>
-        {/* </div> */}
-      </div>
-    </div>
+      <Button onClick={() => handleRegisterClick()} type='button'>Register</Button>
+
+      <p className='password-error-text'>{passwordMatchErrorMsg}</p>
+      <p>Already have an account? <Link to='/login'>Click here</Link></p>
+    </AuthFormContainer>
   )
 }
 

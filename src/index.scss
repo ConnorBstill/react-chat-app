@@ -4,4 +4,7 @@
   height: 100%;
   width: 100%;
 }
- 
+
+.gradient-background {
+  background: linear-gradient(var(--secondary-color), var(--primary-color));// background: linear-gradient(var(--primary-color), var(--secondary-color));
+}

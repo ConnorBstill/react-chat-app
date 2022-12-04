@@ -1,9 +1,12 @@
 import React from 'react';
+import AuthFormContainer from '../../components/AuthFormContainer';
 
 const LoginScreen = () => {
 
   return (
-    <p>Login Screen</p>
+    <AuthFormContainer>
+      <p>Login page</p>
+    </AuthFormContainer>
   )
 }
 
