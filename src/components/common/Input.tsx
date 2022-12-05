@@ -20,7 +20,8 @@ export const Input = ({ placeholder, type, style, name, onChange }: InputProps) 
     <input 
       onChange={(event: ChangeEvent) => onChange(event)} 
       type={type} 
-      style={{ ...inputStyle, ...style }} 
+      style={{ ...inputStyle, ...style }}
+      name={name}
       placeholder={placeholder} />
   );
 }

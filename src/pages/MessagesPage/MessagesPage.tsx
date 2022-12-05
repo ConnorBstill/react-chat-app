@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 
-import { fetchLastMessages } from '../../ApiServices/messagesService';
+import { fetchLastMessages } from '../../ApiServices/MessagesService';
 
 import MessagePreview from '../../components/MessagePreview/MessagePreview';
 

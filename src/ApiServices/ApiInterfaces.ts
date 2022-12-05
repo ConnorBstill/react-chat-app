@@ -8,3 +8,8 @@ export interface Message {
   from: string;
   date: string;
 }
+
+export interface User {
+  username: string;
+  password?: string;
+}

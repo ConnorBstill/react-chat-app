@@ -20,17 +20,19 @@ const RegisterScreen = () => {
     password: '',
     confirmPassword: ''
   });
-  
+  const { password, confirmPassword } = registerForm;
+  const passwordMatchMsg = password !== confirmPassword ? 'Passwords must match' : '';
   const navigate = useNavigate();
-  const { password, confirmPassword } = registerForm
-  const passwordMatchErrorMsg = password !== confirmPassword ? 'Passwords must match' : '';
   
   const handleRegisterClick = () => {
     navigate('/messages');
   }
 
+
   const handleFormChange = (event: ChangeEvent) => {
     const { name, value } = event.target;
+    console.log(name, value, event)
+
     setRegisterForm((prevForm: any) => { 
      return { ...prevForm, [name]: value }
     });
@@ -40,13 +42,13 @@ const RegisterScreen = () => {
     <AuthFormContainer>
       <h1 className=''>Register</h1>
 
-      <Input onChange={(event: ChangeEvent) => handleFormChange(event)} placeholder='Username' />
-      <Input onChange={(event: ChangeEvent) => handleFormChange(event)} type='password' placeholder='Password' />
-      <Input onChange={(event: ChangeEvent) => handleFormChange(event)} type='password' placeholder='Confirm password' />
+      <Input onChange={(event: ChangeEvent) => handleFormChange(event)} name='username' placeholder='Username' />
+      <Input onChange={(event: ChangeEvent) => handleFormChange(event)} type='password' name='password' placeholder='Password' />
+      <Input onChange={(event: ChangeEvent) => handleFormChange(event)} type='password' name='confirmPassword' placeholder='Confirm password' />
 
       <Button onClick={() => handleRegisterClick()} type='button'>Register</Button>
 
-      <p className='password-error-text'>{passwordMatchErrorMsg}</p>
+      <p className='password-error-text'>{passwordMatchMsg}</p>
       <p>Already have an account? <Link to='/login'>Click here</Link></p>
     </AuthFormContainer>
   )

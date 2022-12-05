@@ -1,8 +1,12 @@
 import { API_URL } from '../environment/environment.dev';
 
-import { Response, Message } from './ApiInterfaces'
+import { Response } from './apiInterfaces'
 
 export const fetchLastMessages = async (): Promise<Response> => {
-  const res = await fetch(`${API_URL}/last-messages`);
-  return res.json();
+  try {
+    const res = await fetch(`${API_URL}/last-messages`);
+    return res.json();
+  } catch (err: any) {
+    return { data: [], error: err }
+  }
 }
