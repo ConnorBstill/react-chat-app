@@ -2,7 +2,8 @@ export const get = async (url: string, headers?: HeadersInit) => {
   try {
     const res = await fetch(url, {
       method: 'GET',
-      headers: { ...headers }
+      headers: { ...headers },
+      credentials: 'include',
     });
 
     return res.json();
@@ -11,11 +12,16 @@ export const get = async (url: string, headers?: HeadersInit) => {
   }
 }
 
-export const post = async (url: string, body?: any, headers?: HeadersInit) => {
+export const post = async (url: string, body?: any, headers?: HeadersInit): Promise<any> => {
   try {
     const res = await fetch(url, {
       method: 'POST',
-      headers: { ...headers },
+      headers: { 
+        'Content-Type': 'application/json',
+        // 'credentials' : 'include',
+        ...headers 
+      },
+      // credentials: 'include',
       body: JSON.stringify(body)
     });
 

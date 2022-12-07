@@ -4,9 +4,10 @@ interface ButtonProps {
   children: any;
   onClick: any;
   type?: any;
+  loading?: boolean;
 }
 
-export const Button = ({ children, onClick, type }: ButtonProps) => {
+export const Button = ({ children, onClick, type, loading }: ButtonProps) => {
   const buttonStyles = {
     width: '100%',
     height: 42,
@@ -14,6 +15,6 @@ export const Button = ({ children, onClick, type }: ButtonProps) => {
   }
 
   return (
-    <button onClick={() => onClick()} style={buttonStyles} type={type ? type : 'button'}>{children}</button>
+    <button onClick={() => onClick()} style={buttonStyles} type={type ? type : 'button'}>{loading ? 'Loading...' : children}</button>
   );
 }

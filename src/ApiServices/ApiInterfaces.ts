@@ -1,5 +1,5 @@
 export interface Response { 
-  data: Message[], 
+  data: any, 
   error: boolean
 }
 
