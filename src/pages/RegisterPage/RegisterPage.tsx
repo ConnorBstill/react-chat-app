@@ -37,7 +37,7 @@ const RegisterScreen = () => {
 
     if (registerResponse?.data && !registerResponse?.error) {
       setJwt(registerResponse.data.jwt)
-      navigate('/messages');
+      navigate('/main/messages');
     }
   }
 

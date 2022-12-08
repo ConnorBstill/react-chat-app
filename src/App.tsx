@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Routes,
   Route,
-  Link
+  Outlet
 } from 'react-router-dom';
 
 // State management
@@ -14,30 +14,78 @@ import { Provider } from 'jotai';
 import RegisterScreen from './pages/RegisterPage/RegisterPage';
 import LoginScreen from './pages/LoginPage/LoginPage';
 import MessagesPage from './pages/MessagesPage/MessagesPage';
+import Navbar from './components/Navbar/Navbar';
 
 import '../colors.scss';
 import './App.scss';
 
 const queryClient = new QueryClient();
 
+const Main = () => {
+  return (
+    <>
+      <Navbar />
+      <Outlet />
+    </>
+  );
+}
+
 const App = () => {
   return (
     <Provider>
       <QueryClientProvider client={queryClient}>
         <div className='app-container'>
-          <Router>
+          <BrowserRouter>
             <Routes>
-              <Route path="/messages" element={<MessagesPage />}></Route>
+              <Route path="/main" element={<Main />}>
+                <Route path="messages" element={<MessagesPage />}></Route>
+              </Route>
 
               <Route path="/login" element={<LoginScreen />}></Route>
 
               <Route path="/" element={<RegisterScreen />}></Route>
             </Routes>
-          </Router>
+          </BrowserRouter>
         </div>
       </QueryClientProvider>
     </Provider>
   );
 }
+
+
+
+// WithNav.js (Stand-alone Functional Component)
+// import React from 'react';
+// import NavBar from 'your navbar location';
+// import { Outlet } from 'react-router';
+
+// export default () => {
+//   return (
+//     <>
+//       <NavBar />
+//       <Outlet />
+//     </>
+//   );
+// };
+
+
+// // WithoutNav.js (Stand-alone Functional Component)
+// import React from 'react';
+// import { Outlet } from 'react-router';
+
+// export default () => <Outlet />
+
+
+// // your router (Assuming this resides in your App.js)
+
+//       <Routes>
+//         <Route element={<WithoutNav />}>
+//           <Route path="/login" element={<LoginPage />} />
+//         </Route>
+//         <Route element={<WithNav />}>
+//           <Route path="/=example" element={<Example />} />
+//         </Route>
+//       </Routes>
+
 
 export default App;
