@@ -1,12 +1,12 @@
-const jwtKey = 'chtjwt'
+const jwtProp = 'chtjwt'
 
 export const setJwt = (token: string): void => {
   console.log('setJWt', token)
-  localStorage.setItem(jwtKey, token);
+  localStorage.setItem(jwtProp, token);
 }
 
 export const getJwt = () => {
-  const jwt =  localStorage.getItem(jwtKey);
+  const jwt =  localStorage.getItem(jwtProp);
   console.log(jwt)
   return jwt
 }
