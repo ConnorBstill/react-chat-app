@@ -9,7 +9,7 @@ import { Input, Button } from '../../components/common';
 
 // Services
 import { registerUser } from '../../ApiServices/AuthService';
-import { setJwtCookie } from '../../ApiServices/CookieService';
+import { setJwt } from '../../ApiServices/JwtService';
 
 // Misc
 import { InputChangeEvent } from '../../types/interfaces';
@@ -33,9 +33,10 @@ const RegisterScreen = () => {
   
   const handleRegisterClick = async () => {
     const { data: registerResponse } = await refetch();
-    console.log('registerResponse', registerResponse)
+    console.log('registerResponse', registerResponse);
+
     if (registerResponse?.data && !registerResponse?.error) {
-      setJwtCookie(registerResponse.data) 
+      setJwt(registerResponse.data.jwt)
       navigate('/messages');
     }
   }

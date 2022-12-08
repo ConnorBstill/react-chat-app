@@ -1,9 +1,13 @@
+import { getJwt } from '../ApiServices/JwtService';
+
 export const get = async (url: string, headers?: HeadersInit) => {
   try {
     const res = await fetch(url, {
       method: 'GET',
-      headers: { ...headers },
-      credentials: 'include',
+      headers: { 
+        Authorization: `Bearer ${getJwt()}`,
+        ...headers 
+      },
     });
 
     return res.json();
@@ -18,7 +22,7 @@ export const post = async (url: string, body?: any, headers?: HeadersInit): Prom
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
-        // 'credentials' : 'include',
+        Authorization: `Bearer ${getJwt()}`,
         ...headers 
       },
       // credentials: 'include',
