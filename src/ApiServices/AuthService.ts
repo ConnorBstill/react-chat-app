@@ -1,7 +1,7 @@
 import { API_URL } from '../environment/environment.dev';
 import { get, post } from './HttpService';
 
-import { Response, User } from './apiInterfaces'
+import { Response, User } from '../types/serverDataInterfaces'
 
 export const registerUser = async (user: User): Promise<Response> => {
   try {

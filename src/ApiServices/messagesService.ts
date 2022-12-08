@@ -1,7 +1,7 @@
 import { API_URL } from '../environment/environment.dev';
 import { get } from './HttpService'
 
-import { Response } from './apiInterfaces'
+import { Response } from '../types/serverDataInterfaces'
 
 export const fetchLastMessages = async (): Promise<Response> => {
   try {

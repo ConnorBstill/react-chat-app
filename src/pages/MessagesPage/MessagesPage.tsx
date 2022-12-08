@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
+import { MdSend } from 'react-icons/md';
 
 import { fetchLastMessages } from '../../ApiServices/MessagesService';
 
 import MessagePreview from '../../components/MessagePreview/MessagePreview';
 
+import { Message } from '../../types/serverDataInterfaces';
 import './MessagesPage.scss';
 
 const MessagesPage = () => {
@@ -14,9 +16,8 @@ const MessagesPage = () => {
   if (isLoading) return <p>Loading...</p>;
 
   if (isError) return <p>An error has occurred</p>;
-  console.log(data);
 
-  const renderLastMessages = data?.data.map(({ body, from, date }, index) => {
+  const renderLastMessages = data?.data.map(({ body, from, date }: Message, index: number) => {
     return (
       <MessagePreview
         onClick={() => setSelectedChatIndex(index)}
@@ -28,16 +29,6 @@ const MessagesPage = () => {
     );
   });
 
-  const renderOpenChat = () => {
-    if (selectedChatIndex >= 0) {
-      return (
-        <div className='open-chat-view'>
-
-        </div>
-      )
-    }
-  }
-
   return (
     <div className='messages-page-container'>
       <div className='chats'>
@@ -45,7 +36,15 @@ const MessagesPage = () => {
       </div>
 
       <div className='open-chat'>
-        {renderOpenChat()}
+        <div className='chat-screen'>
+
+        </div>
+
+        <div className='message-input-container'>
+          <textarea placeholder='Write something'></textarea>
+
+          <MdSend className='send-icon' size={50} color='#fff' />
+        </div>
       </div>
     </div>
   );

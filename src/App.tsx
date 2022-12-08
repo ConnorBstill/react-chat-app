@@ -68,24 +68,4 @@ const App = () => {
 //   );
 // };
 
-
-// // WithoutNav.js (Stand-alone Functional Component)
-// import React from 'react';
-// import { Outlet } from 'react-router';
-
-// export default () => <Outlet />
-
-
-// // your router (Assuming this resides in your App.js)
-
-//       <Routes>
-//         <Route element={<WithoutNav />}>
-//           <Route path="/login" element={<LoginPage />} />
-//         </Route>
-//         <Route element={<WithNav />}>
-//           <Route path="/=example" element={<Example />} />
-//         </Route>
-//       </Routes>
-
-
 export default App;
