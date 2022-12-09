@@ -8,3 +8,7 @@ export const getJwt = () => {
   const jwt =  localStorage.getItem(jwtProp);
   return jwt;
 }
+
+export const clearJwt = () => {
+  localStorage.dele
+}

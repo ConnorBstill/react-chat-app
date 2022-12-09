@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 
 import AuthFormContainer from '../../components/AuthFormContainer';
@@ -17,7 +17,8 @@ const LoginScreen = () => {
   const { data, refetch, isRefetching } = useQuery(['authentication', loginForm], () => authenticateUser(loginForm), {
     enabled: false,
     refetchOnWindowFocus: false
-  })
+  });
+  const navigate = useNavigate();
 
   const handleFormChange = (event: InputChangeEvent) => {
     const { name, value } = event.target;
@@ -30,7 +31,9 @@ const LoginScreen = () => {
   const handleLoginClick = async () => {
     console.log(isRefetching)
     const { data: loginResponse } = await refetch();
-    console.log(loginResponse);
+    if (!loginResponse.error && loginResponse.data.jwt) {
+      navigate('/main/messages')
+    }
   }
 
   return (
