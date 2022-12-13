@@ -22,7 +22,6 @@ const RegisterScreen = () => {
     confirmPassword: ''
   });
   const { username, password, confirmPassword } = registerForm;
-
   const { refetch, isRefetching } = useQuery(['authentication', registerForm], () => registerUser({ username, password }), {
     enabled: false,
     refetchOnWindowFocus: false
@@ -33,10 +32,9 @@ const RegisterScreen = () => {
   
   const handleRegisterClick = async () => {
     const { data: registerResponse } = await refetch();
-    console.log('registerResponse', registerResponse);
 
     if (registerResponse?.data && !registerResponse?.error) {
-      setJwt(registerResponse.data.jwt)
+      setJwt(registerResponse.data.jwt);
       navigate('/main/messages');
     }
   }

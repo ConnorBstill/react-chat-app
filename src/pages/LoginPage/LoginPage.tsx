@@ -6,6 +6,7 @@ import AuthFormContainer from '../../components/AuthFormContainer';
 import { Input, Button } from '../../components/common';
 
 import { authenticateUser } from '../../ApiServices/AuthService';
+import { setJwt } from '../../ApiServices/JwtService';
 
 import { InputChangeEvent } from '../../types/interfaces';
 
@@ -14,7 +15,7 @@ const LoginScreen = () => {
     username: '',
     password: '',
   });
-  const { data, refetch, isRefetching } = useQuery(['authentication', loginForm], () => authenticateUser(loginForm), {
+  const { refetch, isRefetching } = useQuery(['authentication', loginForm], () => authenticateUser(loginForm), {
     enabled: false,
     refetchOnWindowFocus: false
   });
@@ -29,10 +30,11 @@ const LoginScreen = () => {
   }
 
   const handleLoginClick = async () => {
-    console.log(isRefetching)
     const { data: loginResponse } = await refetch();
+
     if (!loginResponse.error && loginResponse.data.jwt) {
-      navigate('/main/messages')
+      setJwt(loginResponse.data.jwt);
+      navigate('/main/messages');
     }
   }
 

@@ -17,13 +17,13 @@ const MessagesPage = () => {
 
   if (isError) return <p>An error has occurred</p>;
 
-  const renderLastMessages = data?.data.map(({ body, from, date }: Message, index: number) => {
+  const renderLastMessages = data?.data.map(({ body, from_user, date_time }: Message, index: number) => {
     return (
       <MessagePreview
         onClick={() => setSelectedChatIndex(index)}
         body={body} 
-        from={from} 
-        date={date} 
+        from={from_user} 
+        date={date_time} 
         key={index} 
         selected={selectedChatIndex === index ? true : false} />
     );

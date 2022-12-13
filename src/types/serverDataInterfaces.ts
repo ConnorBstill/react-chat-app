@@ -5,8 +5,8 @@ export interface Response {
 
 export interface Message {
   body: string;
-  from: string;
-  date: string;
+  from_user: string;
+  date_time: string;
 }
 
 export interface User {
