@@ -5,10 +5,12 @@ import { Response } from '../types/serverDataInterfaces'
 
 export const fetchLastMessages = async (): Promise<Response> => {
   try {
-    console.log('fetchLastMessages!!!!1');
     return get(`${API_URL}/last-messages`);
-    // return res.json();
   } catch (err: any) {
     return { data: [], error: err }
   }
+}
+
+export const fetchConversationHistory = async (interlocutorId: number): Promise<Response> => {
+  return get(`${API_URL}/user-message-history/?interlocutorId=${interlocutorId}`);
 }

@@ -22,7 +22,9 @@ const RegisterScreen = () => {
     confirmPassword: ''
   });
   const { username, password, confirmPassword } = registerForm;
-  const { refetch, isRefetching } = useQuery(['authentication', registerForm], () => registerUser({ username, password }), {
+  const { refetch, isRefetching } = useQuery(
+    ['authentication', registerForm], 
+    () => registerUser({ username, password }), {
     enabled: false,
     refetchOnWindowFocus: false
   });
