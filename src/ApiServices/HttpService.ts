@@ -16,7 +16,7 @@ export const get = async (url: string, headers?: HeadersInit) => {
   }
 }
 
-export const post = async (url: string, body?: any, headers?: HeadersInit): Promise<any> => {
+export const post = async (url: string, body: any, headers?: HeadersInit): Promise<any> => {
   try {
     const res = await fetch(url, {
       method: 'POST',

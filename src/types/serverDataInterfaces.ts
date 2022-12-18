@@ -5,6 +5,8 @@ export interface Response {
 
 export interface Message {
   body: string;
+  to_user_id: number
+  type: string;
   from_user_id: number;
   from_user_name: string;
   date_time: string;
