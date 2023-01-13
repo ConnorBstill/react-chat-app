@@ -18,6 +18,7 @@ export const get = async (url: string, headers?: HeadersInit) => {
 
 export const post = async (url: string, body: any, headers?: HeadersInit): Promise<any> => {
   try {
+    console.log(`Bearer ${getJwt()}`)
     const res = await fetch(url, {
       method: 'POST',
       headers: { 

@@ -49,8 +49,8 @@ const MessagesPage = () => {
   if (isError) return <p>An error has occurred</p>;
 
   const handleSendMessageClick = () => {
-    if (selectedChatId > 0) {
-      sendMessageMutation.mutate({ body: textAreaEl.current?.value ?? '', toUserId: selectedChatId });
+    if (selectedChatId > 0 && textAreaEl.current?.value) {
+      sendMessageMutation.mutate({ body: textAreaEl.current?.value, toUserId: selectedChatId });
     }
   }
 

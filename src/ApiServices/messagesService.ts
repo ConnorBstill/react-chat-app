@@ -5,11 +5,7 @@ import { Response } from '../types/serverDataInterfaces';
 import { SentMessage } from '../types/clientDataInterfaces';
 
 export const fetchLastMessages = async (): Promise<Response> => {
-  try {
-    return get(`${API_URL}/last-messages`);
-  } catch (err: any) {
-    return { data: [], error: err }
-  }
+  return get(`${API_URL}/last-messages`);
 }
 
 export const fetchConversationHistory = async (interlocutorId: number): Promise<Response> => {
