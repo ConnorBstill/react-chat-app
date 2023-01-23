@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { useQuery, useMutation } from 'react-query';
+import React, { useState } from 'react';
+import { useQuery, useMutation, QueryCache } from 'react-query';
 import io from 'socket.io-client';
 import { MdSend } from 'react-icons/md';
 
@@ -25,9 +25,8 @@ import './MessagesPage.scss';
 
 const MessagesPage = () => {
   const [selectedChatId, setSelectedChatId] = useState(-1);
+  const [messageText, setMessageText] = useState('');
   const { data, isLoading, isError } = useQuery('lastMessages', fetchLastMessages);
-
-  const textAreaEl = useRef<HTMLTextAreaElement>(null);
 
   const sendMessageMutation = useMutation((newMessage: SentMessage) => sendMessage(newMessage));
 
@@ -48,10 +47,16 @@ const MessagesPage = () => {
 
   if (isError) return <p>An error has occurred</p>;
 
-  const handleSendMessageClick = () => {
-    if (selectedChatId > 0 && textAreaEl.current?.value) {
-      sendMessageMutation.mutate({ body: textAreaEl.current?.value, toUserId: selectedChatId });
+  const handleSendMessage = () => {
+    if (selectedChatId > 0 && messageText) {
+      sendMessageMutation.mutate({ body: messageText, toUserId: selectedChatId });
+
+      setMessageText('')
     }
+  }
+
+  const handleMessageTyping = (text: string) => {
+    setMessageText(text);
   }
 
   const renderLastMessages = data?.data.map(({ body, from_user_id, from_user_name, date_time }: Message, index: number) => {
@@ -76,9 +81,9 @@ const MessagesPage = () => {
         <ChatRoom chatId={selectedChatId} />
 
         <div className='message-input-container'>
-          <textarea ref={textAreaEl} placeholder='Write something'></textarea>
+          <textarea value={messageText} onChange={(e) => handleMessageTyping(e.target.value)} placeholder='Write something'></textarea>
 
-          <MdSend onClick={() => handleSendMessageClick()} className='send-icon' size={50} color='#fff' />
+          <MdSend onClick={() => handleSendMessage()} className='send-icon' size={50} color='#fff' />
         </div>
       </div>
     </div>
