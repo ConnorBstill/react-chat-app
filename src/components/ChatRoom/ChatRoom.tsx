@@ -17,11 +17,13 @@ const ChatRoom = ({ chatId }: ChatHistoryProps) => {
   if (isLoading) return <div className='chat-history-screen'><p>Loading...</p></div>
 
   const renderMessages = messageHistory?.data.map(({ body, type }: Message, index: number) => {
+    const messageContainerClassName = `message-container ${type === 'received' ? 'received-message' : 'sent-message'}`;
+  
     return (
-      <div className='message-position-container' key={index}>
-        <div className={type === 'received' ? 'received-message' : 'sent-message'}>
+      <div className={messageContainerClassName} key={index}>
+        <p className='message-body'>
           {body}
-        </div>
+        </p>
       </div>
     )
   })
